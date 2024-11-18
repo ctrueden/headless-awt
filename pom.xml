@@ -9,12 +9,12 @@
 		<relativePath />
 	</parent>
 
-	<artifactId>headless-agent</artifactId>
+	<artifactId>headless-awt</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 
 	<name>SciJava App Launcher</name>
 	<description>Agent enabling AWT on headless systems.</description>
-	<url>https://github.com/scijava/headless-agent</url>
+	<url>https://github.com/scijava/headless-awt</url>
 	<inceptionYear>2024</inceptionYear>
 	<organization>
 		<name>SciJava</name>
@@ -58,23 +58,23 @@
 	</mailingLists>
 
 	<scm>
-		<connection>scm:git:https://github.com/scijava/headless-agent</connection>
-		<developerConnection>scm:git:git@github.com:scijava/headless-agent</developerConnection>
+		<connection>scm:git:https://github.com/scijava/headless-awt</connection>
+		<developerConnection>scm:git:git@github.com:scijava/headless-awt</developerConnection>
 		<tag>HEAD</tag>
-		<url>https://github.com/scijava/headless-agent</url>
+		<url>https://github.com/scijava/headless-awt</url>
 	</scm>
 	<issueManagement>
 		<system>GitHub Issues</system>
-		<url>https://github.com/scijava/headless-agent/issues</url>
+		<url>https://github.com/scijava/headless-awt/issues</url>
 	</issueManagement>
 	<ciManagement>
 		<system>GitHub Actions</system>
-		<url>https://github.com/scijava/headless-agent/actions</url>
+		<url>https://github.com/scijava/headless-awt/actions</url>
 	</ciManagement>
 
 	<properties>
 		<package-name>org.scijava.headless</package-name>
-		<main-class>org.scijava.headless.HeadlessAgent</main-class>
+		<premain-class>org.scijava.headless.HeadlessAgent</premain-class>
 
 		<license.licenseName>Unlicense</license.licenseName>
 		<license.copyrightOwners>None</license.copyrightOwners>
@@ -93,4 +93,21 @@
 		</dependency>
 		-->
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<Can-Redefine-Classes>true</Can-Redefine-Classes>
+							<Can-Retransform-Classes>true</Can-Retransform-Classes>
+							<Boot-Class-Path>javassist-${javassist.version}.jar</Boot-Class-Path>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
