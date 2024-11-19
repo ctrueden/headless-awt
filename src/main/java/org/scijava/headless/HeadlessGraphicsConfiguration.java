@@ -9,40 +9,40 @@ import java.awt.image.ColorModel;
 /**
  * Custom GraphicsConfiguration for headless operation
  */
-class HeadlessGraphicsConfiguration extends GraphicsConfiguration {
+public class HeadlessGraphicsConfiguration extends GraphicsConfiguration {
     private final HeadlessGraphicsDevice device;
-    
+
     public HeadlessGraphicsConfiguration(HeadlessGraphicsDevice device) {
         this.device = device;
     }
-    
+
     @Override
     public GraphicsDevice getDevice() {
         return device;
     }
-    
+
     @Override
     public ColorModel getColorModel() {
         return ColorModel.getRGBdefault();
     }
-    
+
     @Override
     public ColorModel getColorModel(int transparency) {
         return ColorModel.getRGBdefault();
     }
-    
+
     @Override
     public AffineTransform getDefaultTransform() {
         return new AffineTransform();
     }
-    
+
     @Override
     public AffineTransform getNormalizingTransform() {
         return new AffineTransform();
     }
-    
+
     @Override
     public Rectangle getBounds() {
-        return new Rectangle(0, 0, 1920, 1080); // Default resolution
+        return new Rectangle(0, 0, device.width, device.height);
     }
 }
